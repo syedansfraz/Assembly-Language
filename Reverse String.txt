@@ -1,0 +1,29 @@
+include Irvine32.inc
+
+
+.data
+    star BYTE "Enter a Word:", 0  
+    alpha BYTE 11 DUP(0)   
+
+.code
+main PROC        
+    mov edx, offset star
+    call writestring           
+    mov edx, offset alpha
+    mov ecx, sizeof alpha
+    call readstring             
+    mov ecx, eax               
+    ourloop:
+        mov al, alpha[ecx - 1] 
+        call writechar          
+        loop ourloop            
+    call crlf                   
+    INVOKE ExitProcess, 0       
+main ENDP
+END main
+
+    call crlf
+    loop ourloop
+    INVOKE ExitProcess, 0         
+main ENDP
+END main

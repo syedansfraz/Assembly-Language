@@ -1,0 +1,29 @@
+Q4
+include Irvine32.inc
+
+.data
+    helloMessage BYTE "Enter the Upper Limit:", 0       
+    userInput dword ?     
+    value dword 0
+
+.code
+main PROC
+  
+   mov edx, offset helloMessage
+   call writestring
+   call readint
+   mov [userInput], eax
+   mov ecx, [userInput]
+   inc ecx
+   mov eax,[value]
+   Loop_start:
+    call writeint
+    inc eax
+     loop Loop_start
+
+
+
+
+    INVOKE ExitProcess, 0         
+main ENDP
+END main

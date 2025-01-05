@@ -1,0 +1,37 @@
+include Irvine32.inc 
+
+.data  
+Prompt Byte "Enter Any Number: ?",0 
+Msg1 Byte "Number is not prime",0 
+Msg2 Byte "Number is Prime",0 
+num dword ? 
+ 
+.code  
+  main proc 
+            MOV eDX,OFFSET Prompt 
+      call WriteString 
+      call readint 
+      mov num,eax 
+ 
+      mov eCx,2 
+    again: 
+      mov eDX,0     ; Higher byte of (Dividend )=0 
+      mov eAX,num 
+ 
+      div eCX 
+      cmp eDX,0 
+      JE NotPrime 
+       
+      inc eCX 
+      cmp eCX,num 
+      jne again 
+      mov eDx, offset Msg2 
+      call writestring 
+      jmp endcode 
+    notprime: 
+      mov eDX, OFFSET Msg1 
+      call writestring 
+    endcode: 
+      Invoke ExitProcess,0 
+  main ENDP  
+END main 

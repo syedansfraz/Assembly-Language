@@ -1,0 +1,35 @@
+include Irvine32.inc
+
+.data
+    helloMessage BYTE "Enter the Upper Limit:", 0       
+    userInput dword ?     
+    value dword 1
+    value2 dword 3
+
+.code
+main PROC
+  ;mul ebx            ; Multiply EAX by EBX, result in EDX:EAX
+  ;div ebx            ; Divide EDX:EAX by EBX, result in EAX (quotient), EDX (remainder)
+   mov edx, offset helloMessage
+   call writestring
+   call readint
+   mov [userInput], eax
+   mov ecx, [userInput]
+   mov ebx,1
+   mov eax,ebx
+
+   Loop_start:
+    mul [value2]
+    call writeint
+    inc ebx
+    mov eax,ebx
+    
+    
+       loop Loop_start
+
+
+
+
+    INVOKE ExitProcess, 0         
+main ENDP
+END main

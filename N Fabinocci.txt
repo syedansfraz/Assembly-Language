@@ -1,0 +1,45 @@
+include Irvine32.inc
+
+.data
+    helloMessage BYTE "Enter the Upper Limit:", 0       
+    userInput dword ?     
+    value dword 0
+    forzero dword 0
+    value2 dword 1
+
+.code
+main PROC
+   mov edx, offset helloMessage
+   call writestring
+   call readint
+   mov [userInput], eax
+   mov ecx, [userInput]
+   Sub ecx,2
+   mov eax,[forzero]
+   call writeint
+   call crlf
+   mov eax,[value2]
+   call writeint
+   call crlf
+   mov eax,0
+
+
+   mov edx,[value2]
+   Loop_start:
+    add eax,edx
+    call writeint
+    mov edx,[value2]
+    mov [value2],eax
+    call crlf
+
+    
+    
+    
+       loop Loop_start
+
+
+
+
+    INVOKE ExitProcess, 0         
+main ENDP
+END main

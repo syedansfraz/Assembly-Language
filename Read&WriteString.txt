@@ -1,0 +1,44 @@
+include Irvine32.inc
+
+.data
+name1 byte "Enter your name",0
+     age1 BYTE "Enter your age",0
+    regno1 BYTE "Enter Your RegNo: ", 0  
+    forName BYTE 11 DUP(0)    ; Buffer for name input
+    forRegno BYTE 11 DUP(0)   ; Buffer for regno input
+    forAge DWORD ?            ; Variable for age input
+
+.code
+main PROC      
+;eax contain the lengthof string
+;ecx contain the sizeof array  
+    
+    mov edx, offset name1
+    call writestring
+
+    mov edx,offset forName
+    mov ecx, sizeof forName
+    call readstring
+    call writestring
+    call crlf
+
+    mov edx, offset age1
+    call writestring
+    call readint
+    call writeint
+    call crlf
+
+    mov edx, offset regno1
+    call writestring
+
+    mov edx,offset forRegno
+    mov ecx, sizeof forRegno
+    call readstring
+    call writestring
+
+
+
+
+    INVOKE ExitProcess, 0       
+main ENDP
+END main

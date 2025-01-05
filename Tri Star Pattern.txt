@@ -1,0 +1,28 @@
+include Irvine32.inc
+
+.data
+    star BYTE "*", 0  
+    
+    rows dword 5
+    col dword 0
+   
+
+.code
+main PROC
+    
+    mov edx, offset star
+    outerloop:
+            call crlf
+       inc [col]
+       mov ecx,[col]
+       nestloop:
+       call writestring
+        loop nestloop
+        dec [rows]
+    CMP [rows],0
+    JG outerloop
+        
+       
+    INVOKE ExitProcess, 0         
+main ENDP
+END main

@@ -1,0 +1,27 @@
+include Irvine32.inc 
+
+.data  
+Prompt Byte "Enter a String: ",0
+strvalue byte 11 DUP(0)  
+
+.code  
+  main proc 
+      mov edx, offset Prompt
+      call writestring
+      
+      mov edx, offset strvalue
+      mov ecx, sizeof strvalue
+      call readstring
+      mov ecx, eax
+      mov ebx,0
+      ourloop:
+      mov al,strvalue[ebx]
+      call writechar
+      inc ebx
+      call crlf
+      loop ourloop
+      
+   
+      Invoke ExitProcess,0 
+  main ENDP  
+END main 
